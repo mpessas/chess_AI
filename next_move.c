@@ -1,15 +1,10 @@
 #include <limits.h>
 
 #include "defines.h"
-#include "rank_function.h"
+#include "rank.h"
 #include "state.h"
 
 static const unsigned short DEPTH = 2;
-
-typedef struct Move {
-    unsigned short cur;         /* Current position of piece */
-    unsigned short next;        /* Next position of piece */
-} Move;
 
 const Move INVALID_MOVE = {-1, -1};
 
@@ -43,7 +38,7 @@ void next_move(unsigned short* positions,
 int alphabeta(Move* moves, unsigned short depth, short alpha, short beta) 
 {
     if (depth == 0) {
-        return rank();
+        return rank(moves);
     }
 
     return -1;
