@@ -2,6 +2,12 @@
 #define STATE_H
 
 /**
+ * Initialize/clear game
+ */
+void init();
+void destroy();
+
+/**
  * Get/Set computer player
  */
 unsigned short computer_player();
