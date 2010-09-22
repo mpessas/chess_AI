@@ -1,7 +1,7 @@
 #include <assert.h>
 
 #include "state.h"
-#include "defines.h"
+#include "board.h"
 
 int main() 
 {
