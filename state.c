@@ -1,5 +1,8 @@
+#include <stdlib.h>
+
 #include "state.h"
 #include "board.h"
+#include "defines.h"
 
 /* Computer player */
 static unsigned short player = 0;
@@ -17,7 +20,7 @@ void init()
 {
     // Allocate memory
     chessPositions = (unsigned short*) malloc(sizeof(unsigned short) * MAX_POS + 1);
-    chess Players = (unsigned short*) malloc(sizeof(unsigned short) * MAX_POS + 1);
+    chessPlayerPawns = (unsigned short*) malloc(sizeof(unsigned short) * MAX_POS + 1);
     // Initialize the tables
     unsigned short i;
     for (i = valA1; i <= valH8; ++i) {

@@ -5,6 +5,7 @@
 
 int main() 
 {
+    init();
     set_computer_player(whitePlayer);
     unsigned short p = computer_player();
     assert(p == whitePlayer);
@@ -16,6 +17,8 @@ int main()
     set_player_on_cell(blackPlayer, valH8);
     p = player_on_cell(valH8);
     assert(p == blackPlayer);
+
+    destroy();
 
     return 0;
 }
