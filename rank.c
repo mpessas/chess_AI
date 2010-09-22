@@ -1,5 +1,6 @@
 #include <stdlib.h>
 
+#include "rank.h"
 #include "defines.h"
 #include "board.h"
 #include "state.h"
@@ -13,7 +14,7 @@ static unsigned short points_for_pos(unsigned short);
 static unsigned short points_for_threat(unsigned short);
 
 
-unsigned short rank() 
+unsigned short rank(Move* moves) 
 {
     unsigned short white_rank = 0;
     unsigned short black_rank = 0;

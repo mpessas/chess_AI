@@ -1,33 +1,27 @@
 #include <assert.h>
+#include <stdlib.h>
 
 #include "defines.h"
 #include "board.h"
-#include "rank_function.h"
+#include "rank.h"
 #include "state.h"
+#include "move.h"
+
+
+static const unsigned short DEPTH = 2;
 
 int main(int argc, char** argv)
 {
+    init();
     set_computer_player(whitePlayer);
-    
-    unsigned short chessPositions[65];
-    unsigned short chessPlayerPawns[65];
 
+    Move* moves = (Move*) malloc(sizeof(Move) * DEPTH);
     unsigned short i;
-    for (i = MIN_POS; i <= MAX_POS; ++i) {
-        chessPositions[i] = empty;
-        chessPlayerPawns[i] = noPlayer;
-    }
-    chessPlayerPawns[valA1] = whitePlayer;
-    chessPositions[valA1] = Queen;
-
-    unsigned r = rank(chessPositions, chessPlayerPawns);
-    assert(r == 9);
-
-    chessPlayerPawns[valD4] = whitePlayer;
-    chessPositions[valD4] = Rook;
-    r = rank(chessPositions, chessPlayerPawns);
-    assert(r == 9 + 7);
-
+    for (i = 0; i < DEPTH; ++i)
+        moves[i] = INVALID_MOVE;
+    
+    assert(rank(moves) == 0);
+    
     return 0;
 }
 
