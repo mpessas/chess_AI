@@ -5,11 +5,11 @@
 #include "defines.h"
 
 /* Computer player */
-static unsigned short player = 0;
+static Player player = 0;
 /* Pieces on board */
-static unsigned short* chessPositions;
+static Piece* chessPositions;
 /* Players on board */
-static unsigned short* chessPlayerPawns;
+static Player* chessPlayerPawns;
 
 /* Put the pieces on board */
 static void init_pieces();
@@ -19,12 +19,12 @@ static void init_players();
 void init()
 {
     // Allocate memory
-    chessPositions = (unsigned short*) malloc(sizeof(unsigned short) * MAX_POS + 1);
-    chessPlayerPawns = (unsigned short*) malloc(sizeof(unsigned short) * MAX_POS + 1);
+    chessPositions = (Piece*) malloc(sizeof(Piece) * MAX_POS + 1);
+    chessPlayerPawns = (Player*) malloc(sizeof(Player) * MAX_POS + 1);
     // Initialize the tables
-    unsigned short i;
+    Position i;
     for (i = valA1; i <= valH8; ++i) {
-        chessPositions[i]=empty;
+        chessPositions[i] = empty;
         chessPlayerPawns[i] = noPlayer;
     }
     
@@ -39,32 +39,32 @@ void destroy()
     free(chessPlayerPawns);
 }
 
-unsigned short computer_player() 
+Player computer_player() 
 {
     return player;
 }
 
-void set_computer_player(unsigned short p)
+void set_computer_player(Player p)
 {
     player = p;
 }
 
-unsigned short piece_on_cell(unsigned short pos) 
+Piece piece_on_cell(Position pos) 
 {
     return chessPositions[pos];
 }
 
-void set_piece_on_cell(unsigned short piece, unsigned short pos)
+void set_piece_on_cell(Piece piece, Position pos)
 {
     chessPositions[pos] = piece;
 }
 
-unsigned short player_on_cell(unsigned short pos)
+Player player_on_cell(Position pos)
 {
     return chessPlayerPawns[pos];
 }
 
-void set_player_on_cell(unsigned short player, unsigned short pos)
+void set_player_on_cell(Player player, Position pos)
 {
     chessPlayerPawns[pos] = player;
 }
@@ -83,42 +83,42 @@ void init_pieces()
 
 void init_white_pieces()
 {
-    chessPositions[valA1]=Rook;
-    chessPositions[valB1]=Knight;
-    chessPositions[valC1]=Bishop;
-    chessPositions[valD1]=King;
-    chessPositions[valE1]=Queen;
-    chessPositions[valF1]=Bishop;
-    chessPositions[valG1]=Knight;
-    chessPositions[valH1]=Rook;
-    chessPositions[valA2]=WhitePawnOriginal;
-    chessPositions[valB2]=WhitePawnOriginal;
-    chessPositions[valC2]=WhitePawnOriginal;
-    chessPositions[valD2]=WhitePawnOriginal;
-    chessPositions[valE2]=WhitePawnOriginal;
-    chessPositions[valF2]=WhitePawnOriginal;
-    chessPositions[valG2]=WhitePawnOriginal;
-    chessPositions[valH2]=WhitePawnOriginal;
+    chessPositions[valA1] = Rook;
+    chessPositions[valB1] = Knight;
+    chessPositions[valC1] = Bishop;
+    chessPositions[valD1] = King;
+    chessPositions[valE1] = Queen;
+    chessPositions[valF1] = Bishop;
+    chessPositions[valG1] = Knight;
+    chessPositions[valH1] = Rook;
+    chessPositions[valA2] = WhitePawnOriginal;
+    chessPositions[valB2] = WhitePawnOriginal;
+    chessPositions[valC2] = WhitePawnOriginal;
+    chessPositions[valD2] = WhitePawnOriginal;
+    chessPositions[valE2] = WhitePawnOriginal;
+    chessPositions[valF2] = WhitePawnOriginal;
+    chessPositions[valG2] = WhitePawnOriginal;
+    chessPositions[valH2] = WhitePawnOriginal;
 }
 
 void init_black_pieces() 
 {
-    chessPositions[valA8]=Rook;
-    chessPositions[valB8]=Knight;
-    chessPositions[valC8]=Bishop;
-    chessPositions[valD8]=King;
-    chessPositions[valE8]=Queen;
-    chessPositions[valF8]=Bishop;
-    chessPositions[valG8]=Knight;
-    chessPositions[valH8]=Rook;
-    chessPositions[valA7]=BlackPawnOriginal;
-    chessPositions[valB7]=BlackPawnOriginal;
-    chessPositions[valC7]=BlackPawnOriginal;
-    chessPositions[valD7]=BlackPawnOriginal;
-    chessPositions[valE7]=BlackPawnOriginal;
-    chessPositions[valF7]=BlackPawnOriginal;
-    chessPositions[valG7]=BlackPawnOriginal;
-    chessPositions[valH7]=BlackPawnOriginal;
+    chessPositions[valA8] = Rook;
+    chessPositions[valB8] = Knight;
+    chessPositions[valC8] = Bishop;
+    chessPositions[valD8] = King;
+    chessPositions[valE8] = Queen;
+    chessPositions[valF8] = Bishop;
+    chessPositions[valG8] = Knight;
+    chessPositions[valH8] = Rook;
+    chessPositions[valA7] = BlackPawnOriginal;
+    chessPositions[valB7] = BlackPawnOriginal;
+    chessPositions[valC7] = BlackPawnOriginal;
+    chessPositions[valD7] = BlackPawnOriginal;
+    chessPositions[valE7] = BlackPawnOriginal;
+    chessPositions[valF7] = BlackPawnOriginal;
+    chessPositions[valG7] = BlackPawnOriginal;
+    chessPositions[valH7] = BlackPawnOriginal;
 }
 
 
@@ -135,40 +135,40 @@ void init_players()
 
 void init_white_player() 
 {
-    chessPlayerPawns[valA1]=whitePlayer;
-    chessPlayerPawns[valB1]=whitePlayer;
-    chessPlayerPawns[valC1]=whitePlayer;
-    chessPlayerPawns[valD1]=whitePlayer;
-    chessPlayerPawns[valE1]=whitePlayer;
-    chessPlayerPawns[valF1]=whitePlayer;
-    chessPlayerPawns[valG1]=whitePlayer;
-    chessPlayerPawns[valH1]=whitePlayer;
-    chessPlayerPawns[valA2]=whitePlayer;
-    chessPlayerPawns[valB2]=whitePlayer;
-    chessPlayerPawns[valC2]=whitePlayer;
-    chessPlayerPawns[valD2]=whitePlayer;
-    chessPlayerPawns[valE2]=whitePlayer;
-    chessPlayerPawns[valF2]=whitePlayer;
-    chessPlayerPawns[valG2]=whitePlayer;
-    chessPlayerPawns[valH2]=whitePlayer;
+    chessPlayerPawns[valA1] = whitePlayer;
+    chessPlayerPawns[valB1] = whitePlayer;
+    chessPlayerPawns[valC1] = whitePlayer;
+    chessPlayerPawns[valD1] = whitePlayer;
+    chessPlayerPawns[valE1] = whitePlayer;
+    chessPlayerPawns[valF1] = whitePlayer;
+    chessPlayerPawns[valG1] = whitePlayer;
+    chessPlayerPawns[valH1] = whitePlayer;
+    chessPlayerPawns[valA2] = whitePlayer;
+    chessPlayerPawns[valB2] = whitePlayer;
+    chessPlayerPawns[valC2] = whitePlayer;
+    chessPlayerPawns[valD2] = whitePlayer;
+    chessPlayerPawns[valE2] = whitePlayer;
+    chessPlayerPawns[valF2] = whitePlayer;
+    chessPlayerPawns[valG2] = whitePlayer;
+    chessPlayerPawns[valH2] = whitePlayer;
 }
 
 void init_black_player() 
 {
-    chessPlayerPawns[valA8]=blackPlayer;
-    chessPlayerPawns[valB8]=blackPlayer;
-    chessPlayerPawns[valC8]=blackPlayer;
-    chessPlayerPawns[valD8]=blackPlayer;
-    chessPlayerPawns[valE8]=blackPlayer;
-    chessPlayerPawns[valF8]=blackPlayer;
-    chessPlayerPawns[valG8]=blackPlayer;
-    chessPlayerPawns[valH8]=blackPlayer;
-    chessPlayerPawns[valA7]=blackPlayer;
-    chessPlayerPawns[valB7]=blackPlayer;
-    chessPlayerPawns[valC7]=blackPlayer;
-    chessPlayerPawns[valD7]=blackPlayer;
-    chessPlayerPawns[valE7]=blackPlayer;
-    chessPlayerPawns[valF7]=blackPlayer;
-    chessPlayerPawns[valG7]=blackPlayer;
-    chessPlayerPawns[valH7]=blackPlayer;
+    chessPlayerPawns[valA8] = blackPlayer;
+    chessPlayerPawns[valB8] = blackPlayer;
+    chessPlayerPawns[valC8] = blackPlayer;
+    chessPlayerPawns[valD8] = blackPlayer;
+    chessPlayerPawns[valE8] = blackPlayer;
+    chessPlayerPawns[valF8] = blackPlayer;
+    chessPlayerPawns[valG8] = blackPlayer;
+    chessPlayerPawns[valH8] = blackPlayer;
+    chessPlayerPawns[valA7] = blackPlayer;
+    chessPlayerPawns[valB7] = blackPlayer;
+    chessPlayerPawns[valC7] = blackPlayer;
+    chessPlayerPawns[valD7] = blackPlayer;
+    chessPlayerPawns[valE7] = blackPlayer;
+    chessPlayerPawns[valF7] = blackPlayer;
+    chessPlayerPawns[valG7] = blackPlayer;
+    chessPlayerPawns[valH7] = blackPlayer;
 }

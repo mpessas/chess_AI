@@ -21,9 +21,7 @@ int alphabeta(Move* moves, unsigned short depth, short alpha, short beta);
 /*
  * Calculate next move of computer.
  */
-void next_move(unsigned short* positions,
-               unsigned short* playerPawns,
-               unsigned short pos,
+void next_move(unsigned short pos,
                unsigned short p)
 {
     Move moves[DEPTH];
@@ -35,7 +33,7 @@ void next_move(unsigned short* positions,
 }
 
 
-int alphabeta(Move* moves, unsigned short depth, short alpha, short beta) 
+Rank alphabeta(Move* moves, unsigned short depth, short alpha, short beta) 
 {
     if (depth == 0) {
         return rank(moves);

@@ -3,6 +3,7 @@
 
 #include "move.h"
 
+typedef unsogned short Rank;
 /*
  * Return the rank of the given state for the specified player.
  *
@@ -11,6 +12,6 @@
  *   (ii) holding special cells
  *   (iii) going in a position that threatens an opponent's piece
  */
-unsigned short rank(Move* moves);
+Rank rank(Move* moves);
 
 #endif

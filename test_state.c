@@ -7,7 +7,7 @@ int main()
 {
     init();
     set_computer_player(whitePlayer);
-    unsigned short p = computer_player();
+    Player p = computer_player();
     assert(p == whitePlayer);
 
     set_piece_on_cell(Queen, valA1);

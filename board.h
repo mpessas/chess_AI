@@ -4,6 +4,8 @@
 #define MAX_POS 64              /* Maximum position on board */
 #define MIN_POS 1               /* Minimum position on board */
 
+typedef unsigned short Position;
+
 #define valA1 1
 #define valB1 2
 #define valC1 3
@@ -75,7 +77,6 @@
 #define valF8 62
 #define valG8 63
 #define valH8 64
-
 
 
 #endif
