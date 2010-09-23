@@ -12,15 +12,24 @@ typedef struct Move {
     Player player;              /* The player that performs the move */
 } Move;
 
+/**
+ * The invalid move of the game.
+ */
 extern const Move INVALID_MOVE;
 
 /**
- * Apply a move to the current state
+ * Apply a move to the current state.
+ *
+ * @param m the move to perform
  */
-void apply_move(Move*, Player);
+void apply_move(Move* m);
+
 /**
- * Temporarily apply a move
+ * Temporarily apply a move.
+ *
+ * @param m undo the particular move.
+ *          Must be last move performed.
  */
-void temp_apply_move(Move*, Player);
+void undo_move(Move* m);
 
 #endif
