@@ -5,8 +5,11 @@
 #include "board.h"
 
 typedef struct Move {
-    Position cur;               /* Current position of piece */
+    Piece piece                 /* Player's oppontent */
+    Position prev;              /* Current position of piece */
     Position next;              /* Next position of piece */
+    Piece opponent;             /* Piece of opponent */
+    Player player;              /* The player that performs the move */
 } Move;
 
 extern const Move INVALID_MOVE;
