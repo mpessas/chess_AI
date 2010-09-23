@@ -42,3 +42,15 @@ Rank alphabeta(Move* moves, unsigned short depth, short alpha, short beta)
     return -1;
 }
 
+void apply_move(Move* m, Player p) 
+{
+    set_piece_on_cell(piece_on_cell(m->cur), m->next);
+    set_piece_on_cell(empty, m->cur);
+    set_player_on_cell(empty, m->cur);
+    set_player_on_cell(p, m->next);
+}
+
+void undo_move(Move* m, Player p) 
+{
+    return;
+}
