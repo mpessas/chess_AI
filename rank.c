@@ -7,11 +7,11 @@
 
 
 /* Return the points for the specified piece */
-static Rank points_of_piece(unsigned short);
+static Rank points_of_piece(Piece);
 /* Return the bonus points for holding the specified position */
-static Rank points_for_pos(unsigned short);
+static Rank points_for_pos(Position);
 /* Return the points for threatening an opponent's piece */
-static Rank points_for_threat(unsigned short);
+static Rank points_for_threat(Position);
 
 
 Rank rank(Move* moves) 
@@ -39,7 +39,7 @@ Rank rank(Move* moves)
 }
 
 
-Rank points_of_piece(unsigned short piece)
+Rank points_of_piece(piece piece)
 {
     const Rank king_points = 1000; /* ensure king's absence equals failure */
     const Rank queen_points = 9;
@@ -65,7 +65,7 @@ Rank points_of_piece(unsigned short piece)
     }
 }
 
-Rank points_for_pos(unsigned short pos) 
+Rank points_for_pos(Position pos) 
 {
     const Rank special_pos_points = 2;
     const Rank normal_pos_points = 0;
@@ -83,7 +83,7 @@ Rank points_for_pos(unsigned short pos)
 static void find_opponents(unsigned short,
                            unsigned short*);
 
-Rank points_for_threat(unsigned short pos)
+Rank points_for_threat(Position pos)
 {
     unsigned short* opponents = 0;
     find_opponents(pos, opponents);
