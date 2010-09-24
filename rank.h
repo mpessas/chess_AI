@@ -3,7 +3,7 @@
 
 #include "move.h"
 
-typedef unsogned short Rank;
+typedef short Rank;
 /*
  * Return the rank of the given state for the specified player.
  *

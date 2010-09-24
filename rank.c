@@ -7,17 +7,17 @@
 
 
 /* Return the points for the specified piece */
-static unsigned short points_of_piece(unsigned short);
+static Rank points_of_piece(unsigned short);
 /* Return the bonus points for holding the specified position */
-static unsigned short points_for_pos(unsigned short);
+static Rank points_for_pos(unsigned short);
 /* Return the points for threatening an opponent's piece */
-static unsigned short points_for_threat(unsigned short);
+static Rank points_for_threat(unsigned short);
 
 
-unsigned short rank(Move* moves) 
+Rank rank(Move* moves) 
 {
-    unsigned short white_rank = 0;
-    unsigned short black_rank = 0;
+    Rank white_rank = 0;
+    Rank black_rank = 0;
 
     unsigned short pos;
     for (pos = MIN_POS; pos <= MAX_POS; ++pos) {
@@ -39,13 +39,13 @@ unsigned short rank(Move* moves)
 }
 
 
-unsigned short points_of_piece(unsigned short piece)
+Rank points_of_piece(unsigned short piece)
 {
-    const unsigned short king_points = 1000; /* ensure king's absence equals failure */
-    const unsigned short queen_points = 9;
-    const unsigned short rook_points = 5;
-    const unsigned short bk_points = 3;
-    const unsigned short pawn_points = 1;
+    const Rank king_points = 1000; /* ensure king's absence equals failure */
+    const Rank queen_points = 9;
+    const Rank rook_points = 5;
+    const Rank bk_points = 3;
+    const Rank pawn_points = 1;
     
     switch (piece) {
         case King:
@@ -65,14 +65,16 @@ unsigned short points_of_piece(unsigned short piece)
     }
 }
 
-unsigned short points_for_pos(unsigned short pos) 
+Rank points_for_pos(unsigned short pos) 
 {
+    const Rank special_pos_points = 2;
+    const Rank normal_pos_points = 0;
     unsigned short special_positions[] = {valD4, valD5, valE4, valE5};
     unsigned short i;
     for (i = 0; i < 4; ++i)
         if (pos == special_positions[i])
-            return 2;
-    return 0;
+            return special_pos_points;
+    return normal_pos_points;
 }
 
 /*
@@ -81,7 +83,7 @@ unsigned short points_for_pos(unsigned short pos)
 static void find_opponents(unsigned short,
                            unsigned short*);
 
-unsigned short points_for_threat(unsigned short pos)
+Rank points_for_threat(unsigned short pos)
 {
     unsigned short* opponents = 0;
     find_opponents(pos, opponents);
