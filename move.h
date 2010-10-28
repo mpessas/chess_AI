@@ -5,17 +5,18 @@
 #include "board.h"
 
 typedef struct Move {
-    Piece piece                 /* Player's oppontent */
-    Position prev;              /* Current position of piece */
-    Position next;              /* Next position of piece */
-    Piece opponent;             /* Piece of opponent */
-    Player player;              /* The player that performs the move */
+    Piece piece;    /* Player's piece */
+    Position prev;  /* Current position of piece */
+    Position next;  /* Next position of piece */
+    Piece eats;     /* Piece of opponent */
+    Player player;  /* The player that performs the move */
+    Player eaten;   /* THe player on the cell the piece is moved to */
 } Move;
 
 /**
- * The invalid move of the game.
+ * Computer makes move.
  */
-extern const Move INVALID_MOVE;
+void make_move();
 
 /**
  * Apply a move to the current state.

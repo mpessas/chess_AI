@@ -6,51 +6,55 @@
 
 static const unsigned short DEPTH = 2;
 
-const Move INVALID_MOVE = {-1, -1};
-
 /**
  * Alpha - beta algorithm:
- * params:
- *   moves array of moves of length DEPTH
- *   depth depth of this level
- *   alpha min calue
- *   beta max value
+ * @param p the player that makes this move
+ * @param moves array of moves of length DEPTH
+ * @param depth depth of this level
+ * @param alpha min calue
+ * @param beta max value
  */
-int alphabeta(Move* moves, unsigned short depth, short alpha, short beta);
+Rank alphabeta(Player p, Move* moves, unsigned short depth, short alpha, short beta);
 
-/*
+/**
  * Calculate next move of computer.
  */
-void next_move(unsigned short pos,
-               unsigned short p)
+void make_move()
 {
-    Move moves[DEPTH];
-    unsigned i;
-    for (i = 0; i < DEPTH; ++i)
-        moves[i] = INVALID_MOVE;
-
-    alphabeta(moves, DEPTH, SHRT_MIN, SHRT_MAX);
+    Move moves[DEPTH];          /* Recoed moves to undo/redo */
+    alphabeta(computer_player(), moves, DEPTH, SHRT_MIN, SHRT_MAX);
 }
 
 
-Rank alphabeta(Move* moves, unsigned short depth, short alpha, short beta) 
+Rank alphabeta(Player p, Move* moves, unsigned short depth, short alpha, short beta) 
 {
     if (depth == 0) {
         return rank(moves);
     }
+    Position pos;
+    for (pos = 0; pos < MAX_POS; ++pos) {
+        if (player_on_cell(pos) == p) {
+            Player new_p = (p == blackPlayer) ? whitePlayer : blackPlayer;
+            alpha = alphabeta(new_p, moves, depth - 1, alpha, beta);
+        }
+    }
+    
 
     return -1;
 }
 
-void apply_move(Move* m, Player p) 
+void apply_move(Move* m) 
 {
-    set_piece_on_cell(piece_on_cell(m->cur), m->next);
-    set_piece_on_cell(empty, m->cur);
-    set_player_on_cell(empty, m->cur);
-    set_player_on_cell(p, m->next);
+    set_piece_on_cell(m->piece, m->next);
+    set_piece_on_cell(empty, m->prev);
+    set_player_on_cell(m->player, m->next);
+    set_player_on_cell(noPlayer, m->prev);
 }
 
-void undo_move(Move* m, Player p) 
+void undo_move(Move* m) 
 {
-    return;
+    set_piece_on_cell(m->piece, m->prev);
+    set_piece_on_cell(m->eats, m->next);
+    set_player_on_cell(m->player, m->prev);
+    set_player_on_cell(m->eaten, m->next);
 }
