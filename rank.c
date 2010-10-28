@@ -39,7 +39,7 @@ Rank rank(Move* moves)
 }
 
 
-Rank points_of_piece(piece piece)
+Rank points_of_piece(Piece piece)
 {
     const Rank king_points = 1000; /* ensure king's absence equals failure */
     const Rank queen_points = 9;

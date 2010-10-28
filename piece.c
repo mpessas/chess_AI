@@ -1,9 +1,12 @@
 #include "piece.h"
 
+#include <stdlib.h>
+
 #include "game.h"
+#include "state.h"
 #include "move.h"
 
-static void get_xy_from_pos(Position pos, int* x, int* y) {
+static void get_xy_from_pos(Position pos, Position* x, Position* y) {
     *x = (pos - 1) / 8;
     *y = (pos - 1) % 8;
 }
@@ -43,6 +46,7 @@ MoveElem* rook_moves(Position pos)
     startingPoint[2] = x + 1 - 1;
     startingPoint[3] = y;
 
+    Position targetPosition;
     //verticeCounter is the counter variable for our 4 vertices
     int verticeCounter;
     for (verticeCounter = 0; verticeCounter < 4; verticeCounter++) {
@@ -64,38 +68,38 @@ MoveElem* rook_moves(Position pos)
             //Check if we are within the chessboard boundaries
             if(j * 8 + i > 0 && j * 8 + i < 64 + 1) {
                 //If we are, check if there is no other piece in the target position
-                if (chessPlayerPawns[targetPosition] == noPlayer) {
+                if (player_on_cell(targetPosition) == noPlayer) {
                     //Since there is no piece on our target, we enable it
                     //[chessButtons[targetPosition] setAlpha: 0.7];
                     //chessValidPositions[targetPosition] = YES;
-                    validTargeting[targetPosition] = valid;
+//                    validTargeting[targetPosition] = valid;
                     /* add move to list */
-                    Move m;
-                    m.piece = Rook;
-                    m.prev = pos;
-                    m.next = targetPosition;
-                    m.eats = piece_on_cell(targetPosition);
-                    m.player = player_on_cell(pos);
-                    m.eaten = player_on_cell(targetPosition);
+                    Move* m = (Move*) malloc(sizeof(Move));
+                    m->piece = Rook;
+                    m->prev = pos;
+                    m->next = targetPosition;
+                    m->eats = piece_on_cell(targetPosition);
+                    m->player = player_on_cell(pos);
+                    m->eaten = player_on_cell(targetPosition);
                     list_add(&moves, m);
                 } else {
-                    validTargeting[targetPosition] = friend;
+//                    validTargeting[targetPosition] = friend;
                     //If there is another piece on our target,
                     //check to see if it is friend or foe
-                    if (chessPlayerPawns[targetPosition] != chessPlayerPawns[pos]) {
+                    if (player_on_cell(targetPosition) != player_on_cell(pos)) {
                         //If it's the enemy, paint it red, and activate it
                         //[chessButtons[targetPosition] setBackgroundColor: redColor];
                         //[chessButtons[targetPosition] setAlpha: 0.7];
                         //chessValidPositions[targetPosition] = YES;
-                        validTargeting[targetPosition] = enemy;
+//                        validTargeting[targetPosition] = enemy;
                         /* add move to list */
-                        Move m;
-                        m.piece = Rook;
-                        m.prev = pos;
-                        m.next = targetPosition;
-                        m.eats = piece_on_cell(targetPosition);
-                        m.player = player_on_cell(pos);
-                        m.eaten = player_on_cell(targetPosition);
+                        Move* m = (Move*) malloc(sizeof(Move));
+                        m->piece = Rook;
+                        m->prev = pos;
+                        m->next = targetPosition;
+                        m->eats = piece_on_cell(targetPosition);
+                        m->player = player_on_cell(pos);
+                        m->eaten = player_on_cell(targetPosition);
                         list_add(&moves, m);
                     }
                     break;
